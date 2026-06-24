@@ -1,37 +1,136 @@
 <template>
   <div class="home">
-    <section class="hero">
-      <div class="container">
-        <h1>Hương Vị Cà Phê Thế Giới, Sản Xuất Tại Việt Nam</h1>
-        <p>Từ những hạt cà phê được chọn lọc kỹ càng đến từng tách cà phê hoàn hảo</p>
-        <router-link to="/products" class="btn hero-btn">Khám Phá Ngay</router-link>
+    <!-- Hero Section -->
+    <section class="hero-section py-5">
+      <video class="hero-bg-video" autoplay muted loop playsinline>
+        <source :src="heroVideo2" type="video/mp4" />
+        Trình duyệt của bạn không hỗ trợ thẻ video.
+      </video>
+      <div class="container text-center text-white hero-content">
+        <h1 class="display-4 fw-bold mb-3">Hương Vị Cà Phê Thế Giới, Sản Xuất Tại Việt Nam</h1>
+        <p class="lead mb-4">Từ những hạt cà phê được chọn lọc kỹ càng đến từng tách cà phê hoàn hảo</p>
+        <router-link to="/products" class="btn btn-light btn-lg">Khám Phá Ngay</router-link>
       </div>
     </section>
 
-    <section class="spotlight container">
-      <h2>Gợi ý hôm nay</h2>
-      <p class="spot-note">Ba lựa chọn được chúng tôi đề xuất để bạn bắt đầu ngày mới thật trọn vẹn.</p>
-      <div class="spot-grid">
-        <div class="spot-card" v-for="p in spotlightProducts" :key="p.id">
-          <img :src="p.image" :alt="p.name" />
-          <h3>{{ p.name }}</h3>
-          <p class="intro">{{ p.intro }}</p>
-          <router-link to="/products" class="btn small">Xem thêm</router-link>
+    <!-- Spotlight Section -->
+    <section class="spotlight py-5 my-5">
+      <div class="container">
+        <h2 class="text-center mb-2">Gợi ý hôm nay</h2>
+        <p class="text-center text-brown mb-4">Ba lựa chọn được chúng tôi đề xuất để bạn bắt đầu ngày mới thật trọn vẹn.</p>
+        
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4" v-for="p in spotlightProducts" :key="p.id">
+            <div class="card h-100 shadow-sm text-center">
+              <img :src="p.image" :alt="p.name" class="card-img-top" style="height: 160px; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title">{{ p.name }}</h5>
+                <p class="card-text text-muted small">{{ p.intro }}</p>
+                <router-link to="/products" class="btn btn-brown btn-sm">Xem thêm</router-link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="featured container">
-      <h2>Sản Phẩm Nổi Bật</h2>
-      <div class="product-grid">
-        <ProductCard v-for="product in featuredProducts" :key="product.id" :product="product" />
+    <!-- Quality Section -->
+    <section class="quality py-5 my-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <h2 class="mb-3">Chất Lượng Là Ưu Tiên Hàng Đầu</h2>
+            <p class="text-muted">Bình Coffee được thành lập với sứ mệnh mang đến cho khách hàng những tách cà phê tuyệt vời nhất. Chúng tôi sử dụng các hạt cà phê cao cấp được nhập khẩu từ các vùng trồng cà phê nổi tiếng nhất trên thế giới.</p>
+            <p class="text-muted">Mỗi sản phẩm của chúng tôi đều trải qua quá trình kiểm định chất lượng nghiêm ngặt để đảm bảo hương vị tuyệt hảo và tỉ mỉ nhất quán.</p>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="stat-card">
+                  <div class="fs-1 fw-bold text-brown">500+</div>
+                  <p class="mb-0">Khách Hàng Hài Lòng</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="stat-card">
+                  <div class="fs-1 fw-bold text-brown">10+</div>
+                  <p class="mb-0">Loại Cà Phê</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="stat-card">
+                  <div class="fs-1 fw-bold text-brown">5+</div>
+                  <p class="mb-0">Năm Kinh Nghiệm</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="stat-card">
+                  <div class="fs-1 fw-bold text-brown">100%</div>
+                  <p class="mb-0">Tự Nhiên</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials py-5 my-5">
+      <div class="container">
+        <h2 class="text-center mb-5">Khách Hàng Nói Gì Về Chúng Tôi</h2>
+        
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="testimonial-card h-100">
+              <div class="stars mb-3">★★★★★</div>
+              <p class="mb-3">"Cà phê của Bình Coffee thực sự tuyệt vời! Hương vị đậm đà, mùi thơm quyến rũ. Tôi đã trở thành khách hàng thường xuyên."</p>
+              <strong>- Nguyễn Văn A</strong>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="testimonial-card h-100">
+              <div class="stars mb-3">★★★★★</div>
+              <p class="mb-3">"Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm chất lượng cao và giá cả hợp lý. Rất hài lòng!"</p>
+              <strong>- Trần Thị B</strong>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="testimonial-card h-100">
+              <div class="stars mb-3">★★★★★</div>
+              <p class="mb-3">"Tôi là người yêu thích cà phê, và Bình Coffee là lựa chọn tốt nhất của tôi. Chất lượng không thua các thương hiệu quốc tế."</p>
+              <strong>- Lê Văn C</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2 class="mb-2">Nhận Thông Tin Khuyến Mãi</h2>
+            <p class="mb-4">Đăng ký nhận email để cập nhật các sản phẩm mới và khuyến mãi độc quyền</p>
+            <form class="d-flex gap-2" @submit.prevent>
+              <input type="email" class="form-control" placeholder="Nhập email của bạn..." aria-label="Email" />
+              <button class="btn btn-light" type="submit">Đăng Ký</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import heroVideo2 from '../assets/media/video2.mp4';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard.vue';
 import cafeRangXay from '../assets/media/anh2.jpg';
@@ -59,82 +158,54 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.hero {
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1200x400?text=Coffee+Banner');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  padding: 100px 0;
-  text-align: center;
-}
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-}
-.hero-btn {
-  font-size: 1.2rem;
-  padding: 15px 30px;
-}
-.featured {
-  margin-top: 50px;
-}
-.featured h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 30px;
-}
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+.text-brown {
+  color: #6d4c41;
 }
 
-.spotlight {
-  margin-top: 40px;
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
 }
-.spotlight h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-}
-.spot-note {
-  text-align: center;
-  color: #6d4c41;
-  margin-bottom: 20px;
-}
-.spot-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-.spot-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-}
-.spot-card img {
-  width: 100%;
-  height: 160px;
+
+.hero-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  z-index: 0;
+  filter: brightness(0.55) saturate(0.9);
 }
-.spot-card h3 {
-  margin-bottom: 8px;
+
+.hero-content {
+  position: relative;
+  z-index: 2;
 }
-.spot-card .intro {
-  color: #555;
-  font-size: 0.95rem;
-  margin-bottom: 12px;
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
+  z-index: 1;
 }
-.btn.small {
-  padding: 8px 14px;
-  font-size: 0.9rem;
+
+.btn-brown {
+  background-color: #6d4c41;
+  border-color: #6d4c41;
+  color: white;
+}
+
+.btn-brown:hover {
+  background-color: #8d6242;
+  border-color: #8d6242;
+  color: white;
 }
 </style>

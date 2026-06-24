@@ -1,12 +1,12 @@
 <template>
-  <div class="product-card">
-    <img :src="product.image" :alt="product.name" />
-    <div class="info">
-      <h3>{{ product.name }}</h3>
-      <p class="category">{{ product.category }}</p>
-      <p class="price">{{ formatPrice(product.price) }}</p>
-      <div class="rating">★ {{ product.rating }} ({{ product.reviews }} đánh giá)</div>
-      <button class="btn add-cart" @click="addToCart">Thêm vào giỏ</button>
+  <div class="card h-100 shadow-sm">
+    <img :src="product.image" :alt="product.name" class="card-img-top" style="height: 200px; object-fit: cover;" />
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text text-muted small">{{ product.category }}</p>
+      <p class="fw-bold text-brown mb-2">{{ formatPrice(product.price) }}</p>
+      <div class="rating text-warning small mb-3">★ {{ product.rating }} ({{ product.reviews }} đánh giá)</div>
+      <button @click="addToCart" class="btn btn-brown btn-sm mt-auto">Thêm vào giỏ</button>
     </div>
   </div>
 </template>
@@ -27,43 +27,18 @@ const addToCart = () => {
 </script>
 
 <style scoped>
-.product-card {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  transition: 0.3s;
-}
-.product-card:hover {
-  transform: translateY(-5px);
-}
-.product-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-.info {
-  padding: 15px;
-}
-.info h3 {
-  font-size: 1.2rem;
-  margin-bottom: 5px;
-}
-.category {
-  color: #888;
-  font-size: 0.9rem;
-}
-.price {
-  font-weight: bold;
+.text-brown {
   color: #6d4c41;
-  margin: 10px 0;
 }
-.rating {
-  font-size: 0.9rem;
-  color: #f9a825;
+
+.btn-brown {
+  background-color: #6d4c41;
+  border-color: #6d4c41;
+  color: white;
 }
-.add-cart {
-  margin-top: 10px;
-  width: 100%;
+
+.btn-brown:hover {
+  background-color: #8d6242;
+  border-color: #8d6242;
 }
 </style>

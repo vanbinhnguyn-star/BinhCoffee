@@ -1,15 +1,15 @@
 <template>
-  <div class="products container">
-    <h1>Danh Sách Sản Phẩm</h1>
-    <p class="sub">Tất cả những loại cà phê chọn lọc kỹ càng dành cho bạn</p>
+  <div class="container my-5">
+    <h1 class="text-center mb-2 display-5">Danh Sách Sản Phẩm</h1>
+    <p class="text-center text-brown mb-4">Tất cả những loại cà phê chọn lọc kỹ càng dành cho bạn</p>
 
-    <!-- Bộ lọc đơn giản -->
-    <div class="filters">
-      <select v-model="category">
+    <!-- Bộ lọc -->
+    <div class="d-flex justify-content-center gap-3 mb-5">
+      <select v-model="category" class="form-select" style="width: 200px;">
         <option value="">Tất cả danh mục</option>
         <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
       </select>
-      <select v-model="sortBy">
+      <select v-model="sortBy" class="form-select" style="width: 200px;">
         <option value="newest">Mới nhất</option>
         <option value="price-asc">Giá thấp → cao</option>
         <option value="price-desc">Giá cao → thấp</option>
@@ -17,8 +17,10 @@
       </select>
     </div>
 
-    <div class="product-grid">
-      <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product" />
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" v-for="product in filteredProducts" :key="product.id">
+        <ProductCard :product="product" />
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +37,6 @@ import robustaNangLuong from '../assets/media/anh6.jpg';
 import caPheCotDua from '../assets/media/anh7.jpg';
 import caPheDen from '../assets/media/anh8.jpg';
 import phaLanhChanh from '../assets/media/anh9.jpg';
-import espressoDacChat from '../assets/media/anh10.jpg';
 
 const defaultProducts = [
   {
@@ -134,18 +135,6 @@ const defaultProducts = [
     isBestSeller: false,
     description: 'Pha lạnh sảng khoái, thêm chút chanh tạo vị tươi mát.'
   },
-  {
-    id: 9,
-    name: 'Cà Phê Espresso Đặc Chất',
-    category: 'Espresso',
-    price: 105000,
-    rating: 4.9,
-    reviews: 130,
-    image: espressoDacChat,
-    isNew: false,
-    isBestSeller: true,
-    description: 'Lớp crema vàng và vị đậm, thích hợp cho Cafe Espresso chuẩn Ý.'
-  }
 ];
 
 const products = ref([]);
@@ -192,32 +181,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.products {
-  margin-top: 40px;
-}
-.products h1 {
-  font-size: 2.5rem;
-  text-align: center;
-}
-.sub {
-  text-align: center;
+.text-brown {
   color: #6d4c41;
-  margin-bottom: 30px;
-}
-.filters {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 30px;
-}
-.filters select {
-  padding: 8px 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
 }
 </style>

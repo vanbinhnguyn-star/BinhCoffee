@@ -1,16 +1,20 @@
 <template>
-  <div class="cart-item">
-    <img :src="item.image" :alt="item.name" />
-    <div class="details">
-      <h4>{{ item.name }}</h4>
-      <p>{{ formatPrice(item.price) }}</p>
-      <div class="qty-control">
-        <button @click="decrease">-</button>
-        <span>{{ item.quantity }}</span>
-        <button @click="increase">+</button>
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <div class="d-flex gap-3">
+        <img :src="item.image" :alt="item.name" class="rounded" style="width: 100px; height: 100px; object-fit: cover;">
+        <div class="flex-grow-1">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="text-brown fw-bold mb-2">{{ formatPrice(item.price) }}</p>
+          <div class="d-flex gap-2 align-items-center">
+            <button @click="decrease" class="btn btn-sm btn-outline-secondary">−</button>
+            <span class="px-3">{{ item.quantity }}</span>
+            <button @click="increase" class="btn btn-sm btn-outline-secondary">+</button>
+          </div>
+        </div>
+        <button @click="$emit('remove', item.id)" class="btn btn-close text-danger"></button>
       </div>
     </div>
-    <button class="remove" @click="$emit('remove', item.id)">✕</button>
   </div>
 </template>
 
@@ -33,36 +37,7 @@ const decrease = () => {
 </script>
 
 <style scoped>
-.cart-item {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-.cart-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  margin-right: 15px;
-}
-.details {
-  flex: 1;
-}
-.qty-control button {
-  background: #eee;
-  border: none;
-  padding: 2px 10px;
-  margin: 0 5px;
-  cursor: pointer;
-}
-.remove {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #c62828;
+.text-brown {
+  color: #6d4c41;
 }
 </style>
