@@ -1,12 +1,13 @@
 <template>
   <div class="home">
     <!-- Hero Section -->
-    <section class="hero-section py-5">
-      <video class="hero-bg-video" autoplay muted loop playsinline>
+    <section class="position-relative overflow-hidden min-vh-75 d-flex align-items-center py-5">
+      <video class="position-absolute top-50 start-50 translate-middle w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
         <source :src="heroVideo2" type="video/mp4" />
         Trình duyệt của bạn không hỗ trợ thẻ video.
       </video>
-      <div class="container text-center text-white hero-content">
+      <div class="position-absolute inset-0 bg-dark bg-opacity-50 z-index-1"></div>
+      <div class="container text-center text-white position-relative z-index-2">
         <h1 class="display-4 fw-bold mb-3">Hương Vị Cà Phê Thế Giới, Sản Xuất Tại Việt Nam</h1>
         <p class="lead mb-4">Từ những hạt cà phê được chọn lọc kỹ càng đến từng tách cà phê hoàn hảo</p>
         <router-link to="/products" class="btn btn-light btn-lg">Khám Phá Ngay</router-link>
@@ -14,19 +15,18 @@
     </section>
 
     <!-- Spotlight Section -->
-    <section class="spotlight py-5 my-5">
+    <section class="py-5 my-5">
       <div class="container">
         <h2 class="text-center mb-2">Gợi ý hôm nay</h2>
-        <p class="text-center text-brown mb-4">Ba lựa chọn được chúng tôi đề xuất để bạn bắt đầu ngày mới thật trọn vẹn.</p>
-        
+        <p class="text-center text-secondary mb-4">Ba lựa chọn được chúng tôi đề xuất để bạn bắt đầu ngày mới thật trọn vẹn.</p>
         <div class="row g-4">
           <div class="col-md-6 col-lg-4" v-for="p in spotlightProducts" :key="p.id">
             <div class="card h-100 shadow-sm text-center">
-              <img :src="p.image" :alt="p.name" class="card-img-top" style="height: 160px; object-fit: cover;">
+              <img :src="p.image" :alt="p.name" class="card-img-top object-fit-cover" style="height: 160px;">
               <div class="card-body">
                 <h5 class="card-title">{{ p.name }}</h5>
                 <p class="card-text text-muted small">{{ p.intro }}</p>
-                <router-link to="/products" class="btn btn-brown btn-sm">Xem thêm</router-link>
+                <router-link to="/products" class="btn btn-dark btn-sm">Xem thêm</router-link>
               </div>
             </div>
           </div>
@@ -47,26 +47,26 @@
           <div class="col-lg-6">
             <div class="row g-3">
               <div class="col-md-6">
-                <div class="stat-card">
-                  <div class="fs-1 fw-bold text-brown">500+</div>
+                <div class="card h-100 border-0 shadow-sm p-3 text-center">
+                  <div class="fs-1 fw-bold text-secondary">500+</div>
                   <p class="mb-0">Khách Hàng Hài Lòng</p>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="stat-card">
-                  <div class="fs-1 fw-bold text-brown">10+</div>
+                <div class="card h-100 border-0 shadow-sm p-3 text-center">
+                  <div class="fs-1 fw-bold text-secondary">10+</div>
                   <p class="mb-0">Loại Cà Phê</p>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="stat-card">
-                  <div class="fs-1 fw-bold text-brown">5+</div>
+                <div class="card h-100 border-0 shadow-sm p-3 text-center">
+                  <div class="fs-1 fw-bold text-secondary">5+</div>
                   <p class="mb-0">Năm Kinh Nghiệm</p>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="stat-card">
-                  <div class="fs-1 fw-bold text-brown">100%</div>
+                <div class="card h-100 border-0 shadow-sm p-3 text-center">
+                  <div class="fs-1 fw-bold text-secondary">100%</div>
                   <p class="mb-0">Tự Nhiên</p>
                 </div>
               </div>
@@ -83,24 +83,24 @@
         
         <div class="row g-4">
           <div class="col-md-6 col-lg-4">
-            <div class="testimonial-card h-100">
-              <div class="stars mb-3">★★★★★</div>
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="stars mb-3 text-warning fs-5">★★★★★</div>
               <p class="mb-3">"Cà phê của Bình Coffee thực sự tuyệt vời! Hương vị đậm đà, mùi thơm quyến rũ. Tôi đã trở thành khách hàng thường xuyên."</p>
               <strong>- Nguyễn Văn A</strong>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-4">
-            <div class="testimonial-card h-100">
-              <div class="stars mb-3">★★★★★</div>
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="stars mb-3 text-warning fs-5">★★★★★</div>
               <p class="mb-3">"Giao hàng nhanh, đóng gói cẩn thận. Sản phẩm chất lượng cao và giá cả hợp lý. Rất hài lòng!"</p>
               <strong>- Trần Thị B</strong>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-4">
-            <div class="testimonial-card h-100">
-              <div class="stars mb-3">★★★★★</div>
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="stars mb-3 text-warning fs-5">★★★★★</div>
               <p class="mb-3">"Tôi là người yêu thích cà phê, và Bình Coffee là lựa chọn tốt nhất của tôi. Chất lượng không thua các thương hiệu quốc tế."</p>
               <strong>- Lê Văn C</strong>
             </div>
@@ -157,55 +157,3 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
-.text-brown {
-  color: #6d4c41;
-}
-
-.hero-section {
-  position: relative;
-  overflow: hidden;
-  min-height: 420px;
-  display: flex;
-  align-items: center;
-}
-
-.hero-bg-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: cover;
-  z-index: 0;
-  filter: brightness(0.55) saturate(0.9);
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
-  z-index: 1;
-}
-
-.btn-brown {
-  background-color: #6d4c41;
-  border-color: #6d4c41;
-  color: white;
-}
-
-.btn-brown:hover {
-  background-color: #8d6242;
-  border-color: #8d6242;
-  color: white;
-}
-</style>
