@@ -30,6 +30,25 @@
             </div>
           </div>
           <router-link to="/contact" class="nav-link">Liên Hệ</router-link>
+          
+          <!-- User menu - chỉ hiện khi đã đăng nhập và không phải admin -->
+          <router-link 
+            v-if="auth.isLoggedIn && !auth.isAdmin" 
+            to="/my-orders" 
+            class="nav-link"
+          >
+            Đơn hàng
+          </router-link>
+          
+          <!-- Admin menu - chỉ hiện khi là admin -->
+          <router-link 
+            v-if="auth.isAdmin" 
+            to="/admin" 
+            class="nav-link"
+          >
+            <i class="fas fa-cog"></i> Quản trị
+          </router-link>
+          
           <router-link to="/cart" class="nav-link position-relative">
             🛒 Giỏ Hàng
             <span v-if="cartTotal > 0" class="badge bg-warning text-dark badge-gold position-absolute top-0 start-100 translate-middle">{{ cartTotal }}</span>
@@ -129,5 +148,35 @@ const logout = () => {
 
 .dropdown-link:hover {
   color: #7b4f31;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 991.98px) {
+  .mega-menu {
+    position: static;
+    width: 100%;
+    margin-top: 0;
+    padding: 15px;
+    box-shadow: none;
+    border-radius: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    background: #f8f9fa;
+  }
+  
+  .dropdown-container:hover .mega-menu {
+    transform: none;
+  }
+  
+  .mega-menu-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .dropdown-link {
+    color: #3e2723;
+  }
 }
 </style>

@@ -6,6 +6,9 @@ import Contact from '../views/Contact.vue';
 import Cart from '../views/Cart.vue';
 import Login from '../views/Login.vue';
 import Admin from '../views/Admin.vue';
+import AdminProducts from '../views/AdminProducts.vue';
+import AdminOrders from '../views/AdminOrders.vue';
+import MyOrders from '../views/MyOrders.vue';
 import Dashboard from '../views/Dashboard.vue';
 
 const routes = [
@@ -15,7 +18,17 @@ const routes = [
   { path: '/contact', component: Contact },
   { path: '/cart', component: Cart },
   { path: '/login', component: Login },
-  { path: '/admin', component: Admin, meta: { requiresAdmin: true } },
+  { path: '/my-orders', component: MyOrders, meta: { requiresAuth: true } },
+  { 
+    path: '/admin', 
+    component: Admin,
+    meta: { requiresAdmin: true },
+    children: [
+      { path: 'products', component: AdminProducts },
+      { path: 'orders', component: AdminOrders },
+      { path: '', redirect: 'products' } // Mặc định vào trang sản phẩm
+    ]
+  },
   { path: '/dashboard', component: Dashboard, meta: { requiresAuth: true } }
 ];
 
@@ -39,13 +52,17 @@ const router = createRouter({
 
 // Guard – dùng dynamic import để tránh lỗi circular
 router.beforeEach(async (to, from, next) => {
-  if (to.meta.requiresAdmin || to.meta.requiresAuth) {
+  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  if (requiresAdmin || requiresAuth) {
     const { useAuthStore } = await import('../store/authStore.js');
     const auth = useAuthStore();
     auth.loadFromStorage(); // lấy token từ localStorage
-    if (to.meta.requiresAdmin && !auth.isAdmin) {
+    
+    if (requiresAdmin && !auth.isAdmin) {
       next('/login');
-    } else if (to.meta.requiresAuth && !auth.isLoggedIn) {
+    } else if (requiresAuth && !auth.isLoggedIn) {
       next('/login');
     } else {
       next();

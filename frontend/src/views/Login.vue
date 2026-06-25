@@ -106,7 +106,11 @@ const handleLogin = async () => {
   try {
     const res = await axios.post('/api/auth/login', loginForm.value);
     auth.login(res.data.user, res.data.token);
-    router.push('/');
+    if (res.data.user.role === 'admin') {
+      router.push('/admin/products');
+    } else {
+      router.push('/');
+    }
   } catch (err) {
     alert(err.response?.data?.message || 'Đăng nhập thất bại');
   }
