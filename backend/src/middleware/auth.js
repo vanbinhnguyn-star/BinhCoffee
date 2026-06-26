@@ -9,15 +9,15 @@ export const verifyToken = async (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
-    // Get user from database
-    const user = await User.findById(decoded.userId);
-    if (!user) {
-      return res.status(401).json({ message: 'User not found' });
+    if (!token) {
+      return res.status(401).json({ message: 'Invalid token format' });
     }
 
-    req.user = { userId: user._id, role: user.role };
+    // ✅ Lấy thông tin thẳng từ token, không cần query DB
+    // Token đã chứa userId và role khi được tạo ở authController
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = { userId: decoded.userId, role: decoded.role };
+
     next();
   } catch (error) {
     res.status(403).json({ message: 'Invalid or expired token' });
@@ -29,5 +29,19 @@ export const isAdmin = (req, res, next) => {
     next();
   } else {
     res.status(403).json({ message: 'Admin access required' });
+  }
+};
+
+// Dùng riêng khi cần thông tin đầy đủ của user (vd: getProfile)
+export const getUserFromDB = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.userId).select('-password');
+    if (!user) {
+      return res.status(401).json({ message: 'User not found' });
+    }
+    req.userDoc = user;
+    next();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

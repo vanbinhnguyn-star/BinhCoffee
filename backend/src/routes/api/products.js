@@ -7,13 +7,16 @@ import {
   deleteProduct
 } from '../../controllers/productController.js';
 import { verifyToken, isAdmin } from '../../middleware/auth.js';
+import upload from '../../middleware/uploadMiddleware.js';
 
 const router = express.Router();
 
 router.get('/', getAllProducts);
 router.get('/:id', getProductById);
-router.post('/', verifyToken, isAdmin, createProduct);
-router.put('/:id', verifyToken, isAdmin, updateProduct);
+
+// ✅ Thêm upload.single('image') trước createProduct và updateProduct
+router.post('/', verifyToken, isAdmin, upload.single('image'), createProduct);
+router.put('/:id', verifyToken, isAdmin, upload.single('image'), updateProduct);
 router.delete('/:id', verifyToken, isAdmin, deleteProduct);
 
 export default router;

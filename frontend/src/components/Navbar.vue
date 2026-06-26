@@ -9,6 +9,7 @@
         <div class="navbar-nav ms-auto gap-2">
           <router-link to="/" class="nav-link">Trang Chủ</router-link>
           <router-link to="/products" class="nav-link">Sản Phẩm</router-link>
+
           <div class="nav-item dropdown-container">
             <router-link to="/about" class="nav-link">Về Chúng Tôi</router-link>
             <div class="mega-menu">
@@ -29,32 +30,36 @@
               </div>
             </div>
           </div>
+
           <router-link to="/contact" class="nav-link">Liên Hệ</router-link>
-          
-          <!-- User menu - chỉ hiện khi đã đăng nhập và không phải admin -->
-          <router-link 
-            v-if="auth.isLoggedIn && !auth.isAdmin" 
-            to="/my-orders" 
-            class="nav-link"
-          >
+
+          <!-- Chỉ hiện khi đã đăng nhập và không phải admin -->
+          <router-link v-if="auth.isLoggedIn && !auth.isAdmin" to="/my-orders" class="nav-link">
             Đơn hàng
           </router-link>
-          
-          <!-- Admin menu - chỉ hiện khi là admin -->
-          <router-link 
-            v-if="auth.isAdmin" 
-            to="/admin" 
-            class="nav-link"
-          >
+
+          <!-- Chỉ hiện khi là admin -->
+          <router-link v-if="auth.isAdmin" to="/admin" class="nav-link">
             <i class="fas fa-cog"></i> Quản trị
           </router-link>
-          
-          <router-link to="/cart" class="nav-link position-relative">
+
+          <!-- Giỏ hàng: ẩn khi là admin -->
+          <router-link v-if="!auth.isAdmin" to="/cart" class="nav-link position-relative">
             🛒 Giỏ Hàng
-            <span v-if="cartTotal > 0" class="badge bg-warning text-dark badge-gold position-absolute top-0 start-100 translate-middle">{{ cartTotal }}</span>
+            <span v-if="cartTotal > 0" class="badge bg-warning text-dark badge-gold position-absolute top-0 start-100 translate-middle">
+              {{ cartTotal }}
+            </span>
           </router-link>
+
+          <!-- Chưa đăng nhập -->
           <router-link v-if="!auth.isLoggedIn" to="/login" class="nav-link">Đăng Nhập</router-link>
-          <a v-else href="#" @click.prevent="logout" class="nav-link">Đăng Xuất</a>
+
+          <!-- Đã đăng nhập: tên + Đăng Xuất -->
+          <template v-else>
+            <span class="nav-link user-name">👤 {{ auth.user?.name }}</span>
+            <a href="#" @click.prevent="logout" class="nav-link">Đăng Xuất</a>
+          </template>
+
         </div>
       </div>
     </div>
@@ -85,20 +90,21 @@ const logout = () => {
   transition: color 0.3s;
   margin: 0 5px;
 }
-
 .navbar-nav .nav-link:hover {
   color: #d7a86e !important;
 }
-
+.user-name {
+  color: #d7a86e !important;
+  font-weight: 600;
+  cursor: default;
+}
 .badge-gold {
   background-color: #d7a86e !important;
   color: #3e2723 !important;
 }
-
 .dropdown-container {
   position: relative;
 }
-
 .mega-menu {
   pointer-events: none;
   position: absolute;
@@ -115,7 +121,6 @@ const logout = () => {
   transform: translateY(14px);
   transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
 }
-
 .dropdown-container:hover .mega-menu,
 .dropdown-container:focus-within .mega-menu {
   pointer-events: auto;
@@ -123,20 +128,17 @@ const logout = () => {
   visibility: visible;
   transform: translateY(0);
 }
-
 .mega-menu-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
 }
-
 .mega-menu-column h6 {
   margin-bottom: 12px;
   font-size: 0.95rem;
   font-weight: 700;
   color: #264d24;
 }
-
 .dropdown-link {
   display: block;
   margin-bottom: 10px;
@@ -145,12 +147,9 @@ const logout = () => {
   text-decoration: none;
   transition: color 0.2s ease;
 }
-
 .dropdown-link:hover {
   color: #7b4f31;
 }
-
-/* Responsive cho mobile */
 @media (max-width: 991.98px) {
   .mega-menu {
     position: static;
@@ -165,16 +164,10 @@ const logout = () => {
     pointer-events: auto;
     background: #f8f9fa;
   }
-  
-  .dropdown-container:hover .mega-menu {
-    transform: none;
-  }
-  
   .mega-menu-grid {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
   .dropdown-link {
     color: #3e2723;
   }

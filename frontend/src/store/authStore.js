@@ -16,18 +16,26 @@ export const useAuthStore = defineStore('auth', {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
     },
+
     logout() {
       this.user = null;
       this.token = null;
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     },
+
     loadFromStorage() {
-      const token = localStorage.getItem('token');
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (token && user) {
-        this.token = token;
-        this.user = user;
+      try {
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (token && user) {
+          this.token = token;
+          this.user = user;
+        }
+      } catch {
+        // localStorage bị hỏng hoặc chứa dữ liệu không hợp lệ → xóa luôn
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
       }
     }
   }
