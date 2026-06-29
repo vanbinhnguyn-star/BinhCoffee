@@ -3,6 +3,9 @@
     <h1>Quản trị</h1>
     <ul class="nav nav-tabs mt-4">
       <li class="nav-item">
+        <router-link class="nav-link" :class="{ active: tab === 'stats' }" to="/admin/stats">📊 Thống kê</router-link>
+      </li>
+      <li class="nav-item">
         <router-link class="nav-link" :class="{ active: tab === 'products' }" to="/admin/products">Sản phẩm</router-link>
       </li>
       <li class="nav-item">
@@ -32,13 +35,13 @@ const tab = computed(() => route.path.split('/').pop());
 const unreadCount = computed(() => adminChat.totalUnread);
 
 watch(tab, (newTab) => {
-  if (['products', 'orders', 'chat'].includes(newTab)) {
+  if (['stats', 'products', 'orders', 'chat'].includes(newTab)) {
     localStorage.setItem('adminLastTab', newTab);
   }
 });
 
 if (route.path === '/admin' || route.path === '/admin/') {
-  const lastTab = localStorage.getItem('adminLastTab') || 'products';
+  const lastTab = localStorage.getItem('adminLastTab') || 'stats';
   router.replace(`/admin/${lastTab}`);
 }
 </script>

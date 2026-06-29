@@ -6,11 +6,11 @@ import Contact from '../views/Contact.vue';
 import Cart from '../views/Cart.vue';
 import Login from '../views/Login.vue';
 import Admin from '../views/Admin.vue';
+import AdminStats from '../views/AdminStats.vue';
 import AdminProducts from '../views/AdminProducts.vue';
 import AdminOrders from '../views/AdminOrders.vue';
 import AdminChat from '../components/AdminChat.vue';
 import MyOrders from '../views/MyOrders.vue';
-import Dashboard from '../views/Dashboard.vue';
 
 const routes = [
   { path: '/', component: Home },
@@ -25,12 +25,12 @@ const routes = [
     component: Admin,
     meta: { requiresAdmin: true },
     children: [
+      { path: 'stats',    component: AdminStats },
       { path: 'products', component: AdminProducts },
-      { path: 'orders', component: AdminOrders },
-      { path: 'chat', component: AdminChat }  // ✅ Tab chat
+      { path: 'orders',   component: AdminOrders },
+      { path: 'chat',     component: AdminChat }
     ]
   },
-  { path: '/dashboard', component: Dashboard, meta: { requiresAuth: true } }
 ];
 
 const router = createRouter({
@@ -52,13 +52,9 @@ router.beforeEach(async (to, from, next) => {
     const auth = useAuthStore();
     if (!auth.token) auth.loadFromStorage();
 
-    if (requiresAdmin && !auth.isAdmin) {
-      next('/login');
-    } else if (requiresAuth && !auth.isLoggedIn) {
-      next('/login');
-    } else {
-      next();
-    }
+    if (requiresAdmin && !auth.isAdmin) next('/login');
+    else if (requiresAuth && !auth.isLoggedIn) next('/login');
+    else next();
   } else {
     next();
   }

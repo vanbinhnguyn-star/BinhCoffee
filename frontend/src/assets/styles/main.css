@@ -1,157 +1,176 @@
-/* Coffee Theme Customization */
+/* ============================================================
+   Google Fonts
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ============================================================
+   CSS Variables — mau theme ca phe
+   ============================================================ */
 :root {
-  --coffee-dark: #3e2723;
-  --coffee-brown: #6d4c41;
-  --coffee-light: #8d6242;
-  --coffee-bg: #f9f6f0;
-  --coffee-gold: #d7a86e;
+  --coffee-dark:   #3e2723;
+  --coffee-brown:  #6d4c41;
+  --coffee-light:  #8d6242;
+  --coffee-bg:     #f9f6f0;
+  --coffee-gold:   #d7a86e;
+  --font-heading:  'Playfair Display', Georgia, serif;
+  --font-body:     'Inter', 'Segoe UI', sans-serif;
 }
 
+/* ============================================================
+   Base
+   ============================================================ */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-body);
   background-color: var(--coffee-bg);
   color: var(--coffee-dark);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Custom button styling */
+/* ============================================================
+   Headings — Playfair Display
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+.text-white h1, .text-white h2, .text-white h3,
+.text-white h4, .text-white h5, .text-white h6 {
+  color: white !important;
+}
+
+/* ============================================================
+   Mau nau ca phe — Bootstrap khong co
+   ============================================================ */
 .btn-brown {
   background-color: var(--coffee-brown);
   border-color: var(--coffee-brown);
   color: white;
 }
-
-.btn-brown:hover {
+.btn-brown:hover, .btn-brown:focus {
   background-color: var(--coffee-light);
   border-color: var(--coffee-light);
-}
-
-/* Link styling */
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Custom card hover effect */
-.card {
-  transition: all 0.3s ease;
-  border: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Hero section */
-.hero-section {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1200x400?text=Coffee+Banner');
-  background-size: cover;
-  background-position: center;
   color: white;
-  padding: 100px 0;
-  text-align: center;
+}
+.btn-brown:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.text-brown  { color: var(--coffee-brown) !important; }
+.text-gold   { color: var(--coffee-gold)  !important; }
+.bg-brown    { background-color: var(--coffee-brown) !important; }
+.bg-coffee   { background-color: var(--coffee-bg)    !important; }
+.badge-gold  { background-color: var(--coffee-gold); color: var(--coffee-dark); }
+
+/* ============================================================
+   Navbar brand
+   ============================================================ */
+.navbar-brand {
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
 }
 
-.hero-section h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 20px;
+/* ============================================================
+   Mega menu
+   ============================================================ */
+.dropdown-container { position: relative; }
+.mega-menu {
+  pointer-events: none;
+  position: absolute;
+  top: 100%; left: 0;
+  width: 420px;
+  margin-top: 4px;
+  padding: 22px 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+  z-index: 1000;
 }
-
-.hero-section p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
+.dropdown-container:hover .mega-menu,
+.dropdown-container:focus-within .mega-menu {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
-
-/* Badge customization */
-.badge-gold {
-  background-color: var(--coffee-gold);
-  color: var(--coffee-dark);
-}
-
-/* Newsletter section */
-.newsletter-section {
-  background-color: var(--coffee-light);
-  color: white;
-  padding: 60px 0;
-}
-
-/* Product grid */
-.product-grid {
+.mega-menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  margin-top: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
 }
-
-/* Stat card */
-.stat-card {
-  text-align: center;
-  padding: 30px 20px;
-  border-radius: 18px;
-  background-color: #f5efe7;
-  border: 1px solid rgba(109, 76, 65, 0.12);
-}
-
-.stat-card span {
+.mega-menu-column h6 { font-weight: 700; color: var(--coffee-dark); margin-bottom: 12px; }
+.dropdown-link {
   display: block;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--coffee-brown);
   margin-bottom: 10px;
+  color: var(--coffee-dark);
+  font-size: 0.93rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.dropdown-link:hover { color: var(--coffee-brown); }
+
+@media (max-width: 991.98px) {
+  .mega-menu {
+    position: static;
+    width: 100%;
+    opacity: 1; visibility: visible;
+    transform: none; pointer-events: auto;
+    box-shadow: none; border-radius: 0;
+    background: #f8f9fa; margin-top: 0;
+  }
+  .mega-menu-grid { grid-template-columns: 1fr; gap: 15px; }
 }
 
-/* Testimonial */
-.testimonial-card {
-  background-color: white;
-  border-radius: 18px;
-  padding: 28px 22px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(109, 76, 65, 0.08);
-  color: #4a3223;
-}
-
-.testimonial-card .stars {
-  color: #f6b93b;
-  font-size: 1.2rem;
-  margin-bottom: 16px;
-}
-
-/* Footer */
-footer {
-  background-color: #2c1a12;
-  color: #f0e5d8;
-}
-
-footer h3 {
-  color: var(--coffee-gold);
-}
-
-footer a {
-  color: #f0e5d8;
-  transition: color 0.2s ease;
-}
-
-footer a:hover {
-  color: #ffe8b3;
-}
-
-/* Social links */
-.social-links a {
-  width: 38px;
-  height: 38px;
-  display: inline-flex;
+/* ============================================================
+   Chat widget
+   ============================================================ */
+.chat-launcher {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  width: 56px; height: 56px;
+  background: var(--coffee-brown);
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #f0e5d8;
-  margin-right: 8px;
-  transition: background-color 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  z-index: 999;
+  transition: transform 0.2s;
+}
+.chat-launcher:hover { transform: scale(1.1); }
+
+/* ============================================================
+   Hero video nen
+   ============================================================ */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+}
+.hero-section video {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
 }
 
-.social-links a:hover {
-  background-color: var(--coffee-gold);
-  color: var(--coffee-dark);
-}
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f0ebe6; }
+::-webkit-scrollbar-thumb { background: var(--coffee-gold); border-radius: 3px; }
+
+/* ============================================================
+   Link mac dinh
+   ============================================================ */
+a { text-decoration: none; color: inherit; }

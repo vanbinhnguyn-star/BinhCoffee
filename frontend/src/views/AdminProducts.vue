@@ -1,7 +1,7 @@
 <template>
   <div class="container my-5">
     <h2>Quản lý sản phẩm</h2>
-    <button class="btn btn-coffee mb-3" @click="showAddForm = !showAddForm">
+    <button class="btn btn-brown btn-lg mb-4 px-4 shadow-sm fw-semibold" @click="showAddForm = !showAddForm">
       <i class="fas fa-plus"></i> Thêm sản phẩm
     </button>
 
