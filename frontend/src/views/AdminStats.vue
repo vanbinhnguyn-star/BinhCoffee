@@ -173,7 +173,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, watch } from 'vue';
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 
@@ -258,12 +258,13 @@ const loadStats = async () => {
   }
 };
 
-const changePeriod = (p) => {
-  period.value = p;
-  loadStats();
-};
+// ✅ Gộp "load lần đầu" và "load lại khi đổi period" làm một
+// immediate: true → chạy ngay lúc component mount, không cần onMounted riêng
+watch(period, loadStats, { immediate: true });
 
-onMounted(loadStats);
+const changePeriod = (p) => {
+  period.value = p; // chỉ cần đổi giá trị, watch tự gọi loadStats()
+};
 </script>
 
 <style scoped>

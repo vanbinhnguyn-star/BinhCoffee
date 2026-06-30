@@ -3,7 +3,7 @@ import Home from '../views/Home.vue';
 import Products from '../views/Products.vue';
 import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
-import Cart from '../views/Cart.vue';
+import Checkout from '../views/Checkout.vue';
 import Login from '../views/Login.vue';
 import Admin from '../views/Admin.vue';
 import AdminStats from '../views/AdminStats.vue';
@@ -11,14 +11,17 @@ import AdminProducts from '../views/AdminProducts.vue';
 import AdminOrders from '../views/AdminOrders.vue';
 import AdminChat from '../components/AdminChat.vue';
 import MyOrders from '../views/MyOrders.vue';
+import ProductDetail from '../views/ProductDetail.vue';
 
 const routes = [
   { path: '/', component: Home },
   { path: '/products', component: Products },
   { path: '/about', component: About },
   { path: '/contact', component: Contact },
-  { path: '/cart', component: Cart },
+  // ✅ Bỏ /cart, giỏ hàng giờ là sidebar. Thêm /checkout để điền thông tin giao hàng
+  { path: '/checkout', component: Checkout, meta: { requiresAuth: true } },
   { path: '/login', component: Login },
+  { path: '/products/:id', component: ProductDetail },
   { path: '/my-orders', component: MyOrders, meta: { requiresAuth: true } },
   {
     path: '/admin',

@@ -2,14 +2,14 @@ import { defineStore } from 'pinia';
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    items: []
+    items: [],
+    isOpen: false // ✅ trạng thái mở/đóng sidebar
   }),
   getters: {
     totalItems: (state) => state.items.reduce((sum, i) => sum + i.quantity, 0),
     totalPrice: (state) => state.items.reduce((sum, i) => sum + i.price * i.quantity, 0)
   },
   actions: {
-    // Lấy id thống nhất: ưu tiên _id (MongoDB), fallback về id (local data)
     _getId(product) {
       return product._id || product.id;
     },
@@ -20,7 +20,6 @@ export const useCartStore = defineStore('cart', {
       if (existing) {
         existing.quantity += quantity;
       } else {
-        // Lưu cả _id lẫn id để các chỗ khác dùng đều được
         this.items.push({ ...product, _id: pid, id: pid, quantity });
       }
     },
@@ -36,6 +35,10 @@ export const useCartStore = defineStore('cart', {
 
     clearCart() {
       this.items = [];
-    }
+    },
+
+    openCart() { this.isOpen = true; },
+    closeCart() { this.isOpen = false; },
+    toggleCart() { this.isOpen = !this.isOpen; }
   }
 });

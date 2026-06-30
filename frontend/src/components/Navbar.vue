@@ -33,28 +33,24 @@
 
           <router-link to="/contact" class="nav-link">Liên Hệ</router-link>
 
-          <!-- Chỉ hiện khi đã đăng nhập và không phải admin -->
           <router-link v-if="auth.isLoggedIn && !auth.isAdmin" to="/my-orders" class="nav-link">
             Đơn hàng
           </router-link>
 
-          <!-- Chỉ hiện khi là admin -->
           <router-link v-if="auth.isAdmin" to="/admin" class="nav-link">
             <i class="fas fa-cog"></i> Quản trị
           </router-link>
 
-          <!-- Giỏ hàng: ẩn khi là admin -->
-          <router-link v-if="!auth.isAdmin" to="/cart" class="nav-link position-relative">
+          <!-- ✅ Bấm mở sidebar giỏ hàng thay vì chuyển trang -->
+          <a v-if="!auth.isAdmin" href="#" class="nav-link position-relative" @click.prevent="cartStore.openCart()">
             🛒 Giỏ Hàng
             <span v-if="cartTotal > 0" class="badge bg-warning text-dark badge-gold position-absolute top-0 start-100 translate-middle">
               {{ cartTotal }}
             </span>
-          </router-link>
+          </a>
 
-          <!-- Chưa đăng nhập -->
           <router-link v-if="!auth.isLoggedIn" to="/login" class="nav-link">Đăng Nhập</router-link>
 
-          <!-- Đã đăng nhập: tên + Đăng Xuất -->
           <template v-else>
             <span class="nav-link user-name">👤 {{ auth.user?.name }}</span>
             <a href="#" @click.prevent="logout" class="nav-link">Đăng Xuất</a>
@@ -89,6 +85,7 @@ const logout = () => {
   color: #fff !important;
   transition: color 0.3s;
   margin: 0 5px;
+  cursor: pointer;
 }
 .navbar-nav .nav-link:hover {
   color: #d7a86e !important;
@@ -102,20 +99,17 @@ const logout = () => {
   background-color: #d7a86e !important;
   color: #3e2723 !important;
 }
-.dropdown-container {
-  position: relative;
-}
+.dropdown-container { position: relative; }
 .mega-menu {
   pointer-events: none;
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 100%; left: 0;
   width: 420px;
   margin-top: 4px;
   padding: 22px 20px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.12);
   opacity: 0;
   visibility: hidden;
   transform: translateY(14px);
@@ -147,29 +141,16 @@ const logout = () => {
   text-decoration: none;
   transition: color 0.2s ease;
 }
-.dropdown-link:hover {
-  color: #7b4f31;
-}
+.dropdown-link:hover { color: #7b4f31; }
 @media (max-width: 991.98px) {
   .mega-menu {
-    position: static;
-    width: 100%;
-    margin-top: 0;
-    padding: 15px;
-    box-shadow: none;
-    border-radius: 0;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    pointer-events: auto;
+    position: static; width: 100%;
+    margin-top: 0; padding: 15px;
+    box-shadow: none; border-radius: 0;
+    opacity: 1; visibility: visible;
+    transform: none; pointer-events: auto;
     background: #f8f9fa;
   }
-  .mega-menu-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-  .dropdown-link {
-    color: #3e2723;
-  }
+  .mega-menu-grid { grid-template-columns: 1fr; gap: 15px; }
 }
 </style>
