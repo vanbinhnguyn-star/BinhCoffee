@@ -59,6 +59,14 @@
           >
             🛒 Thêm vào giỏ
           </button>
+
+          <button
+            v-if="auth.isLoggedIn && !auth.isAdmin"
+            class="btn btn-outline-danger btn-lg"
+            @click="toggleLike"
+          >
+            {{ wishlist.isLiked(product._id) ? '❤️' : '🤍' }}
+          </button>
         </div>
       </div>
 
@@ -80,10 +88,14 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 import { useCartStore } from '../store/cartStore';
+import { useWishlistStore } from '../store/wishlistStore';
+import { useAuthStore } from '../store/authStore';
 import ProductReviews from '../components/ProductReviews.vue';
 
 const route = useRoute();
 const cart = useCartStore();
+const wishlist = useWishlistStore();
+const auth = useAuthStore();
 
 const product = ref(null);
 const loading = ref(false);
@@ -106,6 +118,10 @@ const loadProduct = async () => {
 const addToCart = () => {
   cart.addItem(product.value, qty.value);
   alert(`Đã thêm ${qty.value} "${product.value.name}" vào giỏ hàng!`);
+};
+
+const toggleLike = async () => {
+  await wishlist.toggle(product.value._id, auth.token);
 };
 
 onMounted(loadProduct);

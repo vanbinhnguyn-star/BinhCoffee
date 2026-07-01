@@ -11,6 +11,7 @@ import AdminProducts from '../views/AdminProducts.vue';
 import AdminOrders from '../views/AdminOrders.vue';
 import AdminChat from '../components/AdminChat.vue';
 import MyOrders from '../views/MyOrders.vue';
+import MyWishlist from '../views/MyWishlist.vue';
 import ProductDetail from '../views/ProductDetail.vue';
 
 const routes = [
@@ -18,11 +19,11 @@ const routes = [
   { path: '/products', component: Products },
   { path: '/about', component: About },
   { path: '/contact', component: Contact },
-  // ✅ Bỏ /cart, giỏ hàng giờ là sidebar. Thêm /checkout để điền thông tin giao hàng
   { path: '/checkout', component: Checkout, meta: { requiresAuth: true } },
   { path: '/login', component: Login },
   { path: '/products/:id', component: ProductDetail },
   { path: '/my-orders', component: MyOrders, meta: { requiresAuth: true } },
+  { path: '/wishlist', component: MyWishlist, meta: { requiresAuth: true } },
   {
     path: '/admin',
     component: Admin,

@@ -37,6 +37,10 @@
             Đơn hàng
           </router-link>
 
+          <router-link v-if="auth.isLoggedIn && !auth.isAdmin" to="/wishlist" class="nav-link">
+            ❤️ Yêu thích
+          </router-link>
+
           <router-link v-if="auth.isAdmin" to="/admin" class="nav-link">
             <i class="fas fa-cog"></i> Quản trị
           </router-link>
