@@ -12,6 +12,7 @@ import AdminOrders from '../views/AdminOrders.vue';
 import AdminChat from '../components/AdminChat.vue';
 import MyOrders from '../views/MyOrders.vue';
 import MyWishlist from '../views/MyWishlist.vue';
+import Profile from '../views/Profile.vue';
 import ProductDetail from '../views/ProductDetail.vue';
 
 const routes = [
@@ -23,6 +24,7 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/products/:id', component: ProductDetail },
   { path: '/my-orders', component: MyOrders, meta: { requiresAuth: true } },
+  { path: '/profile', component: Profile, meta: { requiresAuth: true } },
   { path: '/wishlist', component: MyWishlist, meta: { requiresAuth: true } },
   {
     path: '/admin',

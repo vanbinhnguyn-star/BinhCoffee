@@ -1,5 +1,5 @@
 <template>
-  <div class="card h-100 shadow-sm position-relative">
+  <div class="card h-100 shadow-sm position-relative" v-fade-in>
     <!-- Nút tim yêu thích -->
     <button
       v-if="auth.isLoggedIn && !auth.isAdmin"
@@ -10,7 +10,7 @@
       {{ wishlist.isLiked(product._id) ? '❤️' : '🤍' }}
     </button>
 
-    <router-link :to="`/products/${product._id}`">
+    <router-link :to="`/products/${product._id}`" style="overflow:hidden; display:block; border-radius: 12px 12px 0 0;">
       <img :src="product.image" :alt="product.name" class="card-img-top" style="height: 200px; object-fit: cover;" />
     </router-link>
     <div class="card-body d-flex flex-column">

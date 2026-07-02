@@ -174,3 +174,47 @@ h1, h2, h3, h4, h5, h6 {
    Link mac dinh
    ============================================================ */
 a { text-decoration: none; color: inherit; }
+
+/* ============================================================
+   Hiệu ứng card sản phẩm
+   ============================================================ */
+
+/* Hover: nổi lên + đổ bóng đậm hơn */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: visible !important;
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(62, 39, 35, 0.18) !important;
+}
+
+/* Ảnh trong card: zoom nhẹ khi hover, dùng wrapper để clip */
+.card .card-img-top {
+  transition: transform 0.4s ease;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* ============================================================
+   Hiệu ứng fade-in khi scroll vào màn hình
+   ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay cho từng card trong grid */
+.fade-in:nth-child(2) { transition-delay: 0.1s; }
+.fade-in:nth-child(3) { transition-delay: 0.2s; }
+.fade-in:nth-child(4) { transition-delay: 0.3s; }
+.fade-in:nth-child(5) { transition-delay: 0.4s; }
+.fade-in:nth-child(6) { transition-delay: 0.5s; }
