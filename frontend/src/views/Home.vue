@@ -265,7 +265,7 @@ onMounted(async () => {
   opacity: 0.8;
 }
 .hero-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: clamp(2rem, 5vw, 3.8rem);
   font-weight: 700;
   line-height: 1.2;
@@ -310,7 +310,7 @@ onMounted(async () => {
   border-right: 1px solid rgba(255,255,255,0.1);
 }
 .stat-item:last-child { border-right: none; }
-.stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #d7a86e; }
+.stat-number { font-family: 'Be Vietnam Pro', sans-serif; font-size: 2rem; font-weight: 700; color: #d7a86e; }
 .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-top: 4px; }
 
 /* ===== SECTION HEADER ===== */
@@ -322,7 +322,7 @@ onMounted(async () => {
   font-weight: 600;
 }
 .section-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 2rem;
   font-weight: 700;
   color: #3e2723;
@@ -364,7 +364,7 @@ onMounted(async () => {
   border-radius: 20px;
 }
 .spotlight-body { padding: 20px; }
-.spotlight-body h5 { font-family: 'Playfair Display', serif; margin-bottom: 8px; }
+.spotlight-body h5 { font-family: 'Be Vietnam Pro', sans-serif; margin-bottom: 8px; }
 
 /* ===== FEATURED ===== */
 .featured-section { background: #f9f6f0; }
@@ -384,14 +384,14 @@ onMounted(async () => {
   box-shadow: 0 2px 12px rgba(62,39,35,0.08);
 }
 .stat-card-icon { font-size: 1.8rem; margin-bottom: 8px; }
-.stat-card-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: #6d4c41; }
+.stat-card-num { font-family: 'Be Vietnam Pro', sans-serif; font-size: 1.8rem; font-weight: 700; color: #6d4c41; }
 .stat-card-label { font-size: 0.82rem; color: #9e8075; margin-top: 4px; }
 
 /* ===== PROCESS ===== */
 .process-section { background: #f9f6f0; }
 .process-step { padding: 20px; }
 .process-icon { font-size: 2.5rem; margin-bottom: 8px; }
-.process-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: #e8ddd8; line-height: 1; }
+.process-num { font-family: 'Be Vietnam Pro', sans-serif; font-size: 2.5rem; font-weight: 700; color: #e8ddd8; line-height: 1; }
 
 /* ===== TESTIMONIALS ===== */
 .testimonial-card {
@@ -416,7 +416,7 @@ onMounted(async () => {
 /* ===== NEWSLETTER ===== */
 .newsletter-section { background: #3e2723; }
 .newsletter-card { padding: 60px 20px; }
-.newsletter-card h2 { font-family: 'Playfair Display', serif; color: white; }
+.newsletter-card h2 { font-family: 'Be Vietnam Pro', sans-serif; color: white; }
 .newsletter-card p { color: rgba(255,255,255,0.7); }
 .newsletter-form {
   display: flex;

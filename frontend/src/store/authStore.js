@@ -1,5 +1,20 @@
 import { defineStore } from 'pinia';
 
+// Helper đọc/ghi cookie
+const setCookie = (name, value, days = 7) => {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Strict`;
+};
+
+const getCookie = (name) => {
+  const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return match ? decodeURIComponent(match[1]) : null;
+};
+
+const deleteCookie = (name) => {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+};
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
@@ -13,29 +28,30 @@ export const useAuthStore = defineStore('auth', {
     login(user, token) {
       this.user = user;
       this.token = token;
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      // ✅ Lưu vào cookie thay vì localStorage
+      setCookie('token', token);
+      setCookie('user', JSON.stringify(user));
     },
 
     logout() {
       this.user = null;
       this.token = null;
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      // Xóa cookie
+      deleteCookie('token');
+      deleteCookie('user');
     },
 
     loadFromStorage() {
       try {
-        const token = localStorage.getItem('token');
-        const user = JSON.parse(localStorage.getItem('user'));
+        const token = getCookie('token');
+        const user = JSON.parse(getCookie('user'));
         if (token && user) {
           this.token = token;
           this.user = user;
         }
       } catch {
-        // localStorage bị hỏng hoặc chứa dữ liệu không hợp lệ → xóa luôn
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        deleteCookie('token');
+        deleteCookie('user');
       }
     }
   }

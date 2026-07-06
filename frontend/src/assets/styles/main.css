@@ -1,7 +1,7 @@
 /* ============================================================
    Google Fonts
    ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 /* ============================================================
    CSS Variables — mau theme ca phe
@@ -12,8 +12,8 @@
   --coffee-light:  #8d6242;
   --coffee-bg:     #f9f6f0;
   --coffee-gold:   #d7a86e;
-  --font-heading:  'Playfair Display', Georgia, serif;
-  --font-body:     'Inter', 'Segoe UI', sans-serif;
+  --font-heading:  'Be Vietnam Pro', sans-serif;
+  --font-body:     'Be Vietnam Pro', sans-serif;
 }
 
 /* ============================================================

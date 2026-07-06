@@ -71,6 +71,20 @@ export const createOrder = async (req, res) => {
     await order.save();
     await order.populate('user', 'name email');
 
+    // ✅ Thông báo realtime cho admin khi có đơn hàng mới
+    const io = req.app.get('io');
+    console.log('[Order] io available:', !!io);
+    if (io) {
+      console.log('[Order] Emitting new_order to admins room');
+      io.to('admins').emit('new_order', {
+        orderId: order._id,
+        userName: order.user?.name || 'Khách',
+        totalAmount: order.totalAmount,
+        itemCount: order.items.length,
+        createdAt: order.createdAt
+      });
+    }
+
     res.status(201).json(order);
 
   } catch (error) {

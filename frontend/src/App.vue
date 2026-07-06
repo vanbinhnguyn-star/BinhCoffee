@@ -1,5 +1,4 @@
 <template>
-  <!-- Ẩn Navbar khi ở trang admin vì admin có sidebar riêng -->
   <Navbar v-if="!isAdminRoute" />
   <router-view />
   <Footer v-if="!isAdminRoute" />
@@ -21,7 +20,9 @@ const auth = useAuthStore();
 const wishlist = useWishlistStore();
 const route = useRoute();
 
-// Ẩn navbar/footer khi đang ở trang /admin/*
+// ✅ Gọi ngay khi app khởi động — giữ trạng thái đăng nhập sau khi F5
+auth.loadFromStorage();
+
 const isAdminRoute = computed(() => route.path.startsWith('/admin'));
 
 watch(

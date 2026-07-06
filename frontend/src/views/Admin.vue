@@ -114,7 +114,7 @@ if (route.path === '/admin' || route.path === '/admin/') {
   font-weight: 700;
   color: #d7a86e;
   border-bottom: 1px solid rgba(255,255,255,0.1);
-  font-family: 'Playfair Display', serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .sidebar-nav {

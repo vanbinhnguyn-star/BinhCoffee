@@ -8,13 +8,14 @@ dotenv.config();
 const basePort = Number(process.env.PORT) || 5000;
 const maxRetries = 5;
 
-// ✅ Tạo HTTP server từ Express app để Socket.io dùng chung
 const httpServer = createServer(app);
 
-// Khởi tạo Socket.io
 const io = new Server(httpServer, {
   cors: { origin: 'http://localhost:3000', methods: ['GET', 'POST'] }
 });
+
+// ✅ Gắn io vào app để các controller dùng được
+app.set('io', io);
 
 const adminSockets = new Set();
 
@@ -33,6 +34,7 @@ io.on('connection', (socket) => {
 
   socket.on('admin_join', () => {
     adminSockets.add(socket.id);
+    socket.join('admins'); // ✅ Thêm vào room 'admins' để dễ broadcast
   });
 
   socket.on('user_message', (data) => {
