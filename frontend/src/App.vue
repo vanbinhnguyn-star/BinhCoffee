@@ -20,7 +20,6 @@ const auth = useAuthStore();
 const wishlist = useWishlistStore();
 const route = useRoute();
 
-// ✅ Gọi ngay khi app khởi động — giữ trạng thái đăng nhập sau khi F5
 auth.loadFromStorage();
 
 const isAdminRoute = computed(() => route.path.startsWith('/admin'));

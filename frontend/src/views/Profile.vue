@@ -57,12 +57,28 @@
       <div class="mb-3">
         <label class="form-label">Mật khẩu mới</label>
         <input type="password" class="form-control" v-model="pwForm.newPassword" autocomplete="new-password" />
+        <div class="form-text">Tối thiểu 6 ký tự</div>
       </div>
       <div class="mb-3">
         <label class="form-label">Xác nhận mật khẩu mới</label>
         <input type="password" class="form-control" v-model="pwForm.confirmPassword" autocomplete="new-password" />
         <div v-if="pwForm.confirmPassword && pwForm.newPassword !== pwForm.confirmPassword" class="text-danger small mt-1">
           Mật khẩu xác nhận không khớp
+        </div>
+        <div v-if="pwForm.confirmPassword && pwForm.newPassword === pwForm.confirmPassword" class="text-success small mt-1">
+          ✓ Mật khẩu khớp
+        </div>
+      </div>
+      <!-- Checklist điều kiện -->
+      <div class="mb-3 small">
+        <div :class="pwForm.currentPassword ? 'text-success' : 'text-muted'">
+          {{ pwForm.currentPassword ? '✓' : '○' }} Đã nhập mật khẩu hiện tại
+        </div>
+        <div :class="pwForm.newPassword.length >= 6 ? 'text-success' : 'text-muted'">
+          {{ pwForm.newPassword.length >= 6 ? '✓' : '○' }} Mật khẩu mới ≥ 6 ký tự (hiện tại: {{ pwForm.newPassword.length }})
+        </div>
+        <div :class="pwForm.newPassword && pwForm.newPassword === pwForm.confirmPassword ? 'text-success' : 'text-muted'">
+          {{ pwForm.newPassword && pwForm.newPassword === pwForm.confirmPassword ? '✓' : '○' }} Xác nhận khớp
         </div>
       </div>
       <button
