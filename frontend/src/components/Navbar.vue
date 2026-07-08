@@ -10,9 +10,9 @@
           <router-link to="/" class="nav-link">Trang Chủ</router-link>
           <router-link to="/products" class="nav-link">Sản Phẩm</router-link>
 
-          <div class="nav-item dropdown-container">
+          <div class="nav-item dropdown-container" @mouseenter="showMenu = true" @mouseleave="startHideMenu">
             <router-link to="/about" class="nav-link">Về Chúng Tôi</router-link>
-            <div class="mega-menu">
+            <div class="mega-menu" :class="{ visible: showMenu }" @mouseenter="showMenu = true" @mouseleave="startHideMenu">
               <div class="mega-menu-grid">
                 <div class="mega-menu-column">
                   <h6>CÀ PHÊ</h6>
@@ -103,7 +103,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useCartStore } from '../store/cartStore';
 import { useAuthStore } from '../store/authStore';
 import { useRouter } from 'vue-router';
@@ -113,6 +113,15 @@ const auth = useAuthStore();
 const router = useRouter();
 
 const cartTotal = computed(() => cartStore.totalItems);
+
+// Mega menu dropdown
+const showMenu = ref(false);
+let hideTimer = null;
+const startHideMenu = () => {
+  hideTimer = setTimeout(() => { showMenu.value = false; }, 150);
+};
+// Nếu chuột quay lại thì hủy timer
+const cancelHide = () => { clearTimeout(hideTimer); };
 
 const logout = () => {
   auth.logout();
@@ -152,8 +161,7 @@ const logout = () => {
   transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
   z-index: 1000;
 }
-.dropdown-container:hover .mega-menu,
-.dropdown-container:focus-within .mega-menu {
+.mega-menu.visible {
   pointer-events: auto;
   opacity: 1;
   visibility: visible;
