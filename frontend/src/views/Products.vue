@@ -2,8 +2,9 @@
   <div class="products-page">
 
     <!-- Hero banner nhỏ -->
-    <div class="products-hero">
-      <div class="container text-center py-5">
+    <div class="products-hero" :style="{ backgroundImage: `url(${heroBanner})` }">
+      <div class="hero-overlay-products"></div>
+      <div class="container text-center py-5" style="position:relative; z-index:2;">
         <h1 class="text-white mb-2">Danh Sách Sản Phẩm</h1>
         <p class="text-white-50 mb-0">Tất cả những loại cà phê chọn lọc kỹ càng dành cho bạn</p>
       </div>
@@ -140,6 +141,7 @@ import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard.vue';
 
+import heroBanner from '../assets/media/anh2.jpg';
 import cafeRangXay from '../assets/media/anh2.jpg';
 import espressoBlend from '../assets/media/anh3.jpg';
 import caPheSuaDa from '../assets/media/anh4.jpg';
@@ -227,10 +229,18 @@ onMounted(async () => {
 
 <style scoped>
 .products-hero {
-  background: linear-gradient(135deg, #3e2723 0%, #6d4c41 100%);
-  min-height: 160px;
+  position: relative;
+  min-height: 220px;
   display: flex;
   align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero-overlay-products {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(62,39,35,0.75) 0%, rgba(109,76,65,0.65) 100%);
 }
 
 /* ===== Filter panel ===== */
